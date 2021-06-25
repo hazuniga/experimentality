@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +26,10 @@ public class DescuentosMaximos implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	/*Cambiar por una relación de uno a muchos*/
-	private int idPais;
+	@ManyToOne
+	@JoinColumn(name = "id_pais")
+	@MapsId("pais")
+	private Pais pais;
 	
 	@Column(name = "porcentaje")
 	private Double porcentaje;
@@ -37,12 +42,12 @@ public class DescuentosMaximos implements Serializable{
 		this.id = id;
 	}
 
-	public int getIdPais() {
-		return idPais;
+	public Pais getPais() {
+		return pais;
 	}
 
-	public void setIdPais(int idPais) {
-		this.idPais = idPais;
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 
 	public Double getPorcentaje() {

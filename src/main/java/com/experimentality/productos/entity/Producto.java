@@ -5,13 +5,17 @@ package com.experimentality.productos.entity;
  */
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.experimentality.ventas.entity.PaisVenta;
 
 @Entity
 @Table(name = "productos")
@@ -37,8 +41,30 @@ public class Producto implements Serializable{
 	@Column(name = "genero")
 	private char genero;
 
+	@OneToMany(mappedBy = "producto")
+	private List<PaisVenta> paisesVenta;
+	
+	@OneToMany(mappedBy = "producto")
+	private List<CaracteristicaProducto> caracteristicas;
+	
+	public List<CaracteristicaProducto> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public void setCaracteristicas(List<CaracteristicaProducto> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+
 	public int getId() {
 		return id;
+	}
+
+	public List<PaisVenta> getPaisesVenta() {
+		return paisesVenta;
+	}
+
+	public void setPaisesVenta(List<PaisVenta> paisesVenta) {
+		this.paisesVenta = paisesVenta;
 	}
 
 	public void setId(int id) {

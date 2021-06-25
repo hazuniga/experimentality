@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -24,9 +27,10 @@ public class Imagen implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	/*cambiar por una relación de uno a muchos*/
-	@Column(name = "id_caracteristica")
-	private int idCaracteristica;
+	@ManyToOne
+	@JoinColumn(name = "id_caracteristica")
+	@MapsId("caracteristica")
+	private CaracteristicaProducto caracteristica;
 	
 	@Column(name = "imagen")
 	private String imagen;
@@ -45,12 +49,12 @@ public class Imagen implements Serializable{
 		this.id = id;
 	}
 
-	public int getIdCaracteristica() {
-		return idCaracteristica;
+	public CaracteristicaProducto getCaracteristica() {
+		return caracteristica;
 	}
 
-	public void setIdCaracteristica(int idCaracteristica) {
-		this.idCaracteristica = idCaracteristica;
+	public void setCaracteristica(CaracteristicaProducto caracteristica) {
+		this.caracteristica = caracteristica;
 	}
 
 	public String getImagen() {
