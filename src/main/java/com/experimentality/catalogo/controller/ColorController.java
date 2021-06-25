@@ -34,13 +34,18 @@ public class ColorController {
 
 		Color obj = new Color();
 		try {
-			if(color.getNombreColor() == "") {
-				response.put("mensaje", "No existen datos para almacenar");
-				response.put("Error", "El objeto se encuentra vacío" + " " + "Objeto sin datos");
+			if(color.getNombreColor() == "" || color.getNombreColor().isEmpty()) {
+				response.put("mensaje", "Registro no almacenado");
+				response.put("Error", "No existen datos para almacenar" + " " + "Objeto sin datos");
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NO_CONTENT);
 			}
 			else {
 				obj = this.colorService.guardar(color);
+				if(obj.getNombreColor() == null || obj.getNombreColor() == "") {
+					response.put("mensaje", "Registro no almacenado");
+					response.put("Error", "Existe información con el registro enviado" + " " + "No se pueden realizar dos registros similares");
+					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
+				}
 			}
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la inserción en la base de datos");

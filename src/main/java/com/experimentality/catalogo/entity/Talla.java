@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +21,8 @@ public class Talla implements Serializable{
 	
 	@Id
 	@Column(name = "id_talla")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tallas_id_talla_seq")
+	@SequenceGenerator(name="tallas_id_talla_seq", sequenceName="tallas_id_talla_seq", allocationSize=1)
 	private int id;
 	
 	@Column(name = "talla")

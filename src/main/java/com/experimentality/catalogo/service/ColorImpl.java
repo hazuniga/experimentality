@@ -16,7 +16,7 @@ public class ColorImpl implements ColorService{
 	
 	@Override
 	public Color guardar(Color color) {
-		if(color != null) {
+		if(this.objDao.findByNameColor(color.getNombreColor()) == null || this.objDao.findByNameColor(color.getNombreColor()) == "") {
 			return this.objDao.save(color); 
 		}
 		return new Color();

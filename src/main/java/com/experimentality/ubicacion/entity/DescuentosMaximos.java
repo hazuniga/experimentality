@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +24,8 @@ public class DescuentosMaximos implements Serializable{
 
 	@Id
 	@Column(name = "id_descuento")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "descuentos_maximos_id_descuento_seq")
+	@SequenceGenerator(name="descuentos_maximos_id_descuento_seq", sequenceName="descuentos_maximos_id_descuento_seq", allocationSize=1)
 	private int id;
 	
 	@ManyToOne

@@ -16,7 +16,7 @@ public class TipoProductoImpl implements TipoProductoService{
 	
 	@Override
 	public TipoProducto guardar(TipoProducto tipoProducto) {
-		if(tipoProducto != null) {
+		if(this.objDao.findByNameTipo(tipoProducto.getTipoProducto()) == null || this.objDao.findByNameTipo(tipoProducto.getTipoProducto()) == "") {
 			return this.objDao.save(tipoProducto);
 		}
 		return new TipoProducto();

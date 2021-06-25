@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +21,8 @@ public class Color implements Serializable{
 
 	@Id
 	@Column(name = "id_color")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "colores_id_color_seq")
+	@SequenceGenerator(name="colores_id_color_seq", sequenceName="colores_id_color_seq", allocationSize=1)
 	private int id;
 	
 	@Column(name = "color")

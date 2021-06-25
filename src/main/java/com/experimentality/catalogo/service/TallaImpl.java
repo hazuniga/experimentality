@@ -16,7 +16,7 @@ public class TallaImpl implements TallaService{
 	
 	@Override
 	public Talla guardar(Talla talla) {
-		if(talla != null) {
+		if(this.objDao.findByNameTalla(talla.getTalla()) == "" || this.objDao.findByNameTalla(talla.getTalla()) == null) {
 			return this.objDao.save(talla);
 		}
 		return new Talla();

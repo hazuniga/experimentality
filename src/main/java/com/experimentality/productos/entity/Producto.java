@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.experimentality.ventas.entity.PaisVenta;
@@ -29,7 +30,8 @@ public class Producto implements Serializable{
 	
 	@Id
 	@Column(name = "id_producto")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productos_id_producto_seq")
+	@SequenceGenerator(name="productos_id_producto_seq", sequenceName="productos_id_producto_seq", allocationSize=1)
 	private int id;
 	
 	@Column(name = "nombre_producto")

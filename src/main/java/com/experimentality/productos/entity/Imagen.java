@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +25,8 @@ public class Imagen implements Serializable{
 	
 	@Id
 	@Column(name = "id_imagen")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imagenes_id_imagen_seq")
+	@SequenceGenerator(name="imagenes_id_imagen_seq", sequenceName="imagenes_id_imagen_seq", allocationSize=1)
 	private int id;
 	
 	@ManyToOne

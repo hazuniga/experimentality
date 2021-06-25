@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.experimentality.productos.entity.CaracteristicaProducto;
 import com.experimentality.productos.entity.Producto;
 
 @Entity
@@ -26,13 +28,14 @@ public class ProductosBuscados implements Serializable{
 
 	@Id
 	@Column(name = "id_producto_buscado")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productos_buscados_id_producto_buscado_seq")
+	@SequenceGenerator(name="productos_buscados_id_producto_buscado_seq", sequenceName="productos_buscados_id_producto_buscado_seq", allocationSize=1)
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_producto")
-	@MapsId("producto")
-	private Producto producto;
+	@JoinColumn(name = "id_caracteristica")
+	@MapsId("caracteristica")
+	private CaracteristicaProducto caracteristica;
 	
 	@Column(name = "fecha_busqueda")
 	private Date fechaBusqueda;
@@ -45,20 +48,20 @@ public class ProductosBuscados implements Serializable{
 		this.id = id;
 	}
 
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-
 	public Date getFechaBusqueda() {
 		return fechaBusqueda;
 	}
 
 	public void setFechaBusqueda(Date fechaBusqueda) {
 		this.fechaBusqueda = fechaBusqueda;
+	}
+
+	public CaracteristicaProducto getCaracteristica() {
+		return caracteristica;
+	}
+
+	public void setCaracteristica(CaracteristicaProducto caracteristica) {
+		this.caracteristica = caracteristica;
 	}
 	
 	
