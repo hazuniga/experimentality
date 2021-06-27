@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import com.experimentality.catalogo.entity.Color;
 import com.experimentality.catalogo.entity.Talla;
 import com.experimentality.catalogo.entity.TipoProducto;
+import com.experimentality.ventas.entity.PaisVenta;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
@@ -68,25 +69,25 @@ public class CaracteristicaProducto implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_color", insertable = false, updatable = false)
-	//@MapsId("color")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Color color;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_tipo_producto", insertable = false, updatable = false)
-	//@MapsId("tipoProducto")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private TipoProducto tipoProducto;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_talla", insertable = false, updatable = false)
-	//@MapsId("talla")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Talla talla;
 	
 	@OneToMany(mappedBy = "caracteristica")
 	private List<Imagen> imagenes;
 
+	@OneToMany(mappedBy = "idCaracteristica")
+	private List<PaisVenta> paisesVenta;
+	
 	public List<Imagen> getImagenes() {
 		return imagenes;
 	}
@@ -133,6 +134,46 @@ public class CaracteristicaProducto implements Serializable{
 
 	public void setTalla(Talla talla) {
 		this.talla = talla;
+	}
+	
+	public List<PaisVenta> getPaisesVenta() {
+		return paisesVenta;
+	}
+
+	public void setPaisesVenta(List<PaisVenta> paisesVenta) {
+		this.paisesVenta = paisesVenta;
+	}
+
+	public Integer getIdTipoProducto() {
+		return idTipoProducto;
+	}
+
+	public void setIdTipoProducto(Integer idTipoProducto) {
+		this.idTipoProducto = idTipoProducto;
+	}
+
+	public Integer getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public Integer getIdTalla() {
+		return idTalla;
+	}
+
+	public void setIdTalla(Integer idTalla) {
+		this.idTalla = idTalla;
+	}
+
+	public Integer getIdColor() {
+		return idColor;
+	}
+
+	public void setIdColor(Integer idColor) {
+		this.idColor = idColor;
 	}
 	
 	

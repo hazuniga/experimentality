@@ -16,13 +16,13 @@ public class PaisVentaPK implements Serializable{
 	@Column(name = "id_pais")
 	private Integer idPais;
 	
-	@Column(name = "id_producto")
-	private Integer idProducto;
+	@Column(name = "id_caracteristica")
+	private Integer idCaracteristica;
 	
 	
-	public PaisVentaPK(Integer idPais, Integer idProducto) {
+	public PaisVentaPK(Integer idPais, Integer idCaracteristica) {
 		this.idPais = idPais;
-		this.idProducto = idProducto;
+		this.idCaracteristica = idCaracteristica;
 	}
 
 	public PaisVentaPK() {
@@ -33,21 +33,16 @@ public class PaisVentaPK implements Serializable{
 		return idPais;
 	}
 
-
 	public void setIdPais(Integer idPais) {
 		this.idPais = idPais;
 	}
 
-
-	public Integer getIdProducto() {
-		return idProducto;
+	public Integer getIdCaracteristica() {
+		return idCaracteristica;
 	}
 
-
-	public void setIdProducto(Integer idProducto) {
-		this.idProducto = idProducto;
+	public void setIdCaracteristica(Integer idCaracteristica) {
+		this.idCaracteristica = idCaracteristica;
 	}
-	
-	
 	
 }

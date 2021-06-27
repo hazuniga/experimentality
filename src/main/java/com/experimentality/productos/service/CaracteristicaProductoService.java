@@ -2,6 +2,7 @@ package com.experimentality.productos.service;
 
 import java.util.List;
 
+import com.experimentality.productos.dto.ProductoDto;
 import com.experimentality.productos.entity.CaracteristicaProducto;
 
 public interface CaracteristicaProductoService {
@@ -34,4 +35,20 @@ public interface CaracteristicaProductoService {
 	 * @return
 	 */
 	public CaracteristicaProducto getCaracteristica(int idCaracteristica);
+	
+	/**
+	 * Función que retorna la lista de las características de los productos más buscados
+	 * @return
+	 */
+	public List<CaracteristicaProducto> listaProductosMasBuscados();
+	
+	/**
+	 * Función que copia los datos de un ProductoDto para que sean accesibles al almacenamiento 
+	 * mediante CaracteristicaProducto.
+	 * Retorna el id que se genera de guardar el registro
+	 * @param producto
+	 * @param idProducto
+	 * @return
+	 */
+	public int guardarCaracteristica(ProductoDto producto, int idProducto);
 }

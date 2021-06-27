@@ -34,6 +34,9 @@ public class Imagen implements Serializable{
 	@MapsId("caracteristica")
 	private CaracteristicaProducto caracteristica;
 	
+	@Column(name = "id_caracteristica")
+	private Integer idCaracteristica;
+	
 	@Column(name = "imagen")
 	private String imagen;
 	
@@ -41,7 +44,7 @@ public class Imagen implements Serializable{
 	private String ruta;
 	
 	@Column(name = "tipo")
-	private char tipo;
+	private String tipo;
 
 	public int getId() {
 		return id;
@@ -75,12 +78,20 @@ public class Imagen implements Serializable{
 		this.ruta = ruta;
 	}
 
-	public char getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(char tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public Integer getIdCaracteristica() {
+		return idCaracteristica;
+	}
+
+	public void setIdCaracteristica(Integer idCaracteristica) {
+		this.idCaracteristica = idCaracteristica;
 	}
 	
 	

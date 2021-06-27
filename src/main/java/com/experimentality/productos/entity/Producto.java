@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.experimentality.ventas.entity.PaisVenta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
@@ -44,10 +43,7 @@ public class Producto implements Serializable{
 	private String descripcion;
 		
 	@Column(name = "genero")
-	private char genero;
-
-	@OneToMany(mappedBy = "producto")
-	private List<PaisVenta> paisesVenta;
+	private String genero;
 	
 	@OneToMany(mappedBy = "producto")
 	@JsonIgnore
@@ -63,14 +59,6 @@ public class Producto implements Serializable{
 
 	public int getId() {
 		return id;
-	}
-
-	public List<PaisVenta> getPaisesVenta() {
-		return paisesVenta;
-	}
-
-	public void setPaisesVenta(List<PaisVenta> paisesVenta) {
-		this.paisesVenta = paisesVenta;
 	}
 
 	public void setId(int id) {
@@ -93,11 +81,11 @@ public class Producto implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public char getGenero() {
+	public String getGenero() {
 		return genero;
 	}
 
-	public void setGenero(char genero) {
+	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 	

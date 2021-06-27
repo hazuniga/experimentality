@@ -11,4 +11,7 @@ public interface ProductoDao extends CrudRepository<Producto, Integer>{
 			"from	productos\r\n" + 
 			"where	lower(nombre_producto) = lower(?1)", nativeQuery = true)
 	public String findProductByName(String nombre_producto);
+	
+	@Query(value = "select * from COALESCE(findProduct(?1,?2,?3),0)", nativeQuery = true)
+	public int findProduct(String nombre, String descripcion, String genero);
 }

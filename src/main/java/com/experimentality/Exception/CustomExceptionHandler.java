@@ -37,7 +37,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler{
 	@ExceptionHandler(JpaObjectRetrievalFailureException.class)
 	public ResponseEntity<?> DataException(Exception e){
 		Map<String, String> response = new HashMap<>();
-		response.put("Not_Found", "El id ingresado no se encuentra registrado en la base de datos");
+		response.put("Not_Found", "El valor de id ingresado no se encuentra registrado en la base de datos");
 		response.put("error", e.getMessage());
 		response.put("exception_type", e.getClass().getSimpleName());
 		String[] messageFull = e.getLocalizedMessage().split(" ");
@@ -62,6 +62,46 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler{
 	}
 	
 	
+	/**
+	 * Función que indica una excepción en el registro del nombre, evitando que se pueda duplicar
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(TallaException.class)
+	public ResponseEntity<?> TallaException(Exception e){
+		Map<String, String> response = new HashMap<>();
+		response.put("cause", "Ya existe un registro con ese nombre");
+		response.put("error", "Datos no almacenados");
+		response.put("exception_type", e.getClass().getSimpleName());
+		return new ResponseEntity<Map<String,String>>(response, HttpStatus.CONFLICT);
+	}
 	
+	/**
+	 * Función que indica una excepción en el registro del nombre, evitando que se pueda duplicar
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(ColorException.class)
+	public ResponseEntity<?> ColorException(Exception e){
+		Map<String, String> response = new HashMap<>();
+		response.put("cause", "Ya existe un registro con ese nombre");
+		response.put("error", "Datos no almacenados");
+		response.put("exception_type", e.getClass().getSimpleName());
+		return new ResponseEntity<Map<String,String>>(response, HttpStatus.CONFLICT);
+	}
+	
+	/**
+	 * Función que indica una excepción en el registro del nombre, evitando que se pueda duplicar
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(TipoProductoException.class)
+	public ResponseEntity<?> TipoProductoException(Exception e){
+		Map<String, String> response = new HashMap<>();
+		response.put("cause", "Ya existe un registro con ese nombre");
+		response.put("error", "Datos no almacenados");
+		response.put("exception_type", e.getClass().getSimpleName());
+		return new ResponseEntity<Map<String,String>>(response, HttpStatus.CONFLICT);
+	}
 	
 }

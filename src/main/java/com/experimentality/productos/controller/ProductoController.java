@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.experimentality.productos.dto.ProductoDto;
+import com.experimentality.productos.dto.ProductosMasBuscadosDto;
 import com.experimentality.productos.entity.Producto;
 import com.experimentality.productos.service.ProductoService;
 
@@ -24,6 +26,23 @@ public class ProductoController {
 
 	@Autowired
 	private ProductoService productoService;
+	
+	
+	@GetMapping("/productosMasBuscados")
+	public ResponseEntity<?> productosMasBuscados(){
+		List<ProductosMasBuscadosDto> productosMasBuscados = new ArrayList<>();
+		productosMasBuscados.addAll(this.productoService.listarProductosMasBuscados());
+		
+		return new ResponseEntity<List<ProductosMasBuscadosDto>>(productosMasBuscados, HttpStatus.OK);
+	}
+	
+	@PostMapping("/guardarProducto")
+	public ResponseEntity<?> guardar(@RequestBody ProductoDto producto) {
+		ProductoDto obj = new ProductoDto();
+		obj = this.productoService.guardarProducto(producto);
+		
+		return new ResponseEntity<ProductoDto>(obj, HttpStatus.OK);
+	}
 	
 	@PostMapping
 	public ResponseEntity<?> guardar(@Validated @RequestBody Producto producto) {

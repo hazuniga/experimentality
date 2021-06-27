@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.experimentality.productos.entity.Producto;
+import com.experimentality.productos.entity.CaracteristicaProducto;
 import com.experimentality.ubicacion.entity.Pais;
 
 @Entity
@@ -31,9 +31,9 @@ public class PaisVenta implements Serializable{
 	private Pais pais;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_producto")
-	@MapsId("idProducto")
-	private Producto producto;
+	@JoinColumn(name = "id_caracteristica")
+	@MapsId("idCaracteristica")
+	private CaracteristicaProducto idCaracteristica;
 	
 	@Column(name = "precio")
 	private Double precio;
@@ -41,8 +41,8 @@ public class PaisVenta implements Serializable{
 	@Column(name = "porcentaje_descuento")
 	private Double porcentajeDescuento;
 
-	public PaisVenta(Pais pais, Producto producto) {
-		this.id = new PaisVentaPK(pais.getId(), producto.getId());
+	public PaisVenta(Pais pais, CaracteristicaProducto caracteristica) {
+		this.id = new PaisVentaPK(pais.getId(), caracteristica.getId());
 	}
 	
 	public PaisVenta() {
@@ -71,6 +71,22 @@ public class PaisVenta implements Serializable{
 
 	public void setPorcentajeDescuento(Double porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public CaracteristicaProducto getIdCaracteristica() {
+		return idCaracteristica;
+	}
+
+	public void setIdCaracteristica(CaracteristicaProducto idCaracteristica) {
+		this.idCaracteristica = idCaracteristica;
 	}
 	
 	

@@ -14,4 +14,7 @@ public interface PaisVentaDao extends CrudRepository<PaisVenta, PaisVentaPK>{
 			"from	pais_venta\r\n" + 
 			"where	id_producto = ?1", nativeQuery = true)
 	public List<PaisVenta> findPaisesVenta(int idProducto);
+	
+	@Query(value = "select * from savePaisVenta(?1,?2,?3,?4)", nativeQuery = true)
+	public int savePaisVenta(int idPais, int idCaracteristica, Double precio, Double porcentaje);
 }

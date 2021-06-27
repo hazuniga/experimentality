@@ -1,14 +1,12 @@
 package com.experimentality.catalogo.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.experimentality.catalogo.entity.Color;
 import com.experimentality.catalogo.service.ColorService;
-import com.sun.istack.NotNull;
 
 @RestController
 @RequestMapping("/api/Color")
@@ -30,22 +27,9 @@ public class ColorController {
 
 	
 	@PostMapping
-	public ResponseEntity<?> guardar(@NotNull @RequestBody Color color) {
-		Map<String, Object> response = new HashMap<>();
-
+	public ResponseEntity<?> guardar(@Validated @RequestBody Color color) {
 		Color obj = new Color();
-		try {
-			obj = this.colorService.guardar(color);
-			if(obj.getNombreColor() == null || obj.getNombreColor() == "") {
-				response.put("mensaje", "Registro no almacenado");
-				response.put("Error", "Existe información con el registro enviado" + " " + "No se pueden realizar dos registros similares");
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
-			}
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar la inserción en la base de datos");
-			response.put("Error", e.getMessage() + " " + e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		obj = this.colorService.guardar(color);
 
 		return new ResponseEntity<Color>(obj, HttpStatus.OK);
 	}
@@ -53,30 +37,15 @@ public class ColorController {
 	@GetMapping
 	public ResponseEntity<?> listarColores(){
 		List<Color> list = new ArrayList<>();
-		Map<String, Object> response = new HashMap<>();
-		try {
-			list.addAll(this.colorService.listarColores());
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-			response.put("error", e.getMessage()+" "+ e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);//Error 500
-		}
+		list.addAll(this.colorService.listarColores());
 		
-		return new ResponseEntity<List<Color>>(list, HttpStatus.OK);//correcto 200
+		return new ResponseEntity<List<Color>>(list, HttpStatus.OK);
 	}
 	
 	@PutMapping
 	public ResponseEntity<?> actualizar(@RequestBody Color color) {
-		Map<String, Object> response = new HashMap<>();
-		
 		boolean option;
-		try {
-			option = this.colorService.actualizar(color);
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar la actualización en la base de datos");
-			response.put("Error", e.getMessage()+" "+e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		option = this.colorService.actualizar(color);
 		
 		return new ResponseEntity<Boolean>(option,HttpStatus.OK);
 	}
@@ -84,15 +53,8 @@ public class ColorController {
 	@GetMapping("/buscarColor/{idColor}")
 	public ResponseEntity<?> buscarColor(@PathVariable("idColor") int idColor){
 		Color obj = new Color();
-		Map<String, Object> response = new HashMap<>();
-		try {
-			obj = this.colorService.getColor(idColor);
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-			response.put("error", e.getMessage()+" "+ e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);//Error 500
-		}
+		obj = this.colorService.getColor(idColor);
 		
-		return new ResponseEntity<Color>(obj, HttpStatus.OK);//correcto 200
+		return new ResponseEntity<Color>(obj, HttpStatus.OK);
 	}
 }

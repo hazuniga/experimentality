@@ -2,6 +2,7 @@ package com.experimentality.productos.service;
 
 import java.util.List;
 
+import com.experimentality.productos.dto.ImagenDto;
 import com.experimentality.productos.entity.Imagen;
 
 public interface ImagenService {
@@ -40,4 +41,11 @@ public interface ImagenService {
 	 * @return
 	 */
 	public Imagen getImagen(int idImagen);
+	
+	/**
+	 * Ajusta y registra las imagenes al sistema
+	 * @param imagenes
+	 * @param idCaracteristica
+	 */
+	public void guardarImagen(List<ImagenDto> imagenes, int idCaracteristica);
 }
