@@ -10,7 +10,6 @@ import com.experimentality.catalogo.service.ColorService;
 import com.experimentality.catalogo.service.TallaService;
 import com.experimentality.catalogo.service.TipoProductoService;
 import com.experimentality.productos.dao.ProductoDao;
-import com.experimentality.productos.dto.CaracteristicaDto;
 import com.experimentality.productos.dto.ImagenDto;
 import com.experimentality.productos.dto.ProductoDto;
 import com.experimentality.productos.dto.ProductosMasBuscadosDto;
