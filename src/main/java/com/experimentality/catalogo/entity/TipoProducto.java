@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name = "tipo_productos")
 public class TipoProducto implements Serializable{
@@ -26,6 +28,7 @@ public class TipoProducto implements Serializable{
 	private int id;
 	
 	@Column(name = "tipo_producto")
+	@NotNull
 	private String tipoProducto;
 
 	public int getId() {

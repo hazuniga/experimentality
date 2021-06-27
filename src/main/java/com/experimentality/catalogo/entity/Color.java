@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name = "colores")
 public class Color implements Serializable{
@@ -26,6 +28,7 @@ public class Color implements Serializable{
 	private int id;
 	
 	@Column(name = "color")
+	@NotNull
 	private String nombreColor;
 
 	public int getId() {

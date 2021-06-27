@@ -15,7 +15,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.experimentality.productos.entity.CaracteristicaProducto;
-import com.experimentality.productos.entity.Producto;
 
 @Entity
 @Table(name = "productos_buscados")

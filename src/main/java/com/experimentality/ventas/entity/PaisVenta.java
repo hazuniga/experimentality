@@ -27,12 +27,12 @@ public class PaisVenta implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "id_pais")
-	@MapsId("pais")
+	@MapsId("idPais")
 	private Pais pais;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_producto")
-	@MapsId("producto")
+	@MapsId("idProducto")
 	private Producto producto;
 	
 	@Column(name = "precio")
@@ -41,26 +41,12 @@ public class PaisVenta implements Serializable{
 	@Column(name = "porcentaje_descuento")
 	private Double porcentajeDescuento;
 
-	
 	public PaisVenta(Pais pais, Producto producto) {
-		this.pais = pais;
-		this.producto = producto;
+		this.id = new PaisVentaPK(pais.getId(), producto.getId());
 	}
 	
-	public Pais getPais() {
-		return pais;
-	}
-
-	public void setPais(Pais pais) {
-		this.pais = pais;
-	}
-
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public PaisVenta() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public PaisVentaPK getId() {

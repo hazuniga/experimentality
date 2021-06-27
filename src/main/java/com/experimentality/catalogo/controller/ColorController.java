@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.experimentality.catalogo.entity.Color;
 import com.experimentality.catalogo.service.ColorService;
+import com.sun.istack.NotNull;
 
 @RestController
 @RequestMapping("/api/Color")
@@ -29,23 +30,16 @@ public class ColorController {
 
 	
 	@PostMapping
-	public ResponseEntity<?> guardar(@RequestBody Color color) {
+	public ResponseEntity<?> guardar(@NotNull @RequestBody Color color) {
 		Map<String, Object> response = new HashMap<>();
 
 		Color obj = new Color();
 		try {
-			if(color.getNombreColor() == "" || color.getNombreColor().isEmpty()) {
+			obj = this.colorService.guardar(color);
+			if(obj.getNombreColor() == null || obj.getNombreColor() == "") {
 				response.put("mensaje", "Registro no almacenado");
-				response.put("Error", "No existen datos para almacenar" + " " + "Objeto sin datos");
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NO_CONTENT);
-			}
-			else {
-				obj = this.colorService.guardar(color);
-				if(obj.getNombreColor() == null || obj.getNombreColor() == "") {
-					response.put("mensaje", "Registro no almacenado");
-					response.put("Error", "Existe información con el registro enviado" + " " + "No se pueden realizar dos registros similares");
-					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
-				}
+				response.put("Error", "Existe información con el registro enviado" + " " + "No se pueden realizar dos registros similares");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 			}
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la inserción en la base de datos");

@@ -19,26 +19,35 @@ public class PaisVentaPK implements Serializable{
 	@Column(name = "id_producto")
 	private Integer idProducto;
 	
+	
 	public PaisVentaPK(Integer idPais, Integer idProducto) {
 		this.idPais = idPais;
 		this.idProducto = idProducto;
+	}
+
+	public PaisVentaPK() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getIdPais() {
 		return idPais;
 	}
 
+
 	public void setIdPais(Integer idPais) {
 		this.idPais = idPais;
 	}
+
 
 	public Integer getIdProducto() {
 		return idProducto;
 	}
 
+
 	public void setIdProducto(Integer idProducto) {
 		this.idProducto = idProducto;
 	}
+	
 	
 	
 }

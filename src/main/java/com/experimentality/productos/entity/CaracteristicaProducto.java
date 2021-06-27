@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ import javax.persistence.Table;
 import com.experimentality.catalogo.entity.Color;
 import com.experimentality.catalogo.entity.Talla;
 import com.experimentality.catalogo.entity.TipoProducto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "caracteristicas_productos")
@@ -34,24 +37,51 @@ public class CaracteristicaProducto implements Serializable{
 	@SequenceGenerator(name="caracteristicas_productos_id_caracteristica_seq", sequenceName="caracteristicas_productos_id_caracteristica_seq", allocationSize=1)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_producto")
+	/**
+	 * Estas variables se definen para evitar cargar sus objetos correspondientes al momento de realizar operaciones de registro
+	 * y edición
+	 */
+	@Column(name = "id_tipo_producto")
+	@NotNull
+	private Integer idTipoProducto;
+	
+	@Column(name = "id_producto")
+	@NotNull
+	private Integer idProducto;
+	
+	@Column(name = "id_talla")
+	@NotNull
+	private Integer idTalla;
+	
+	@Column(name = "id_color")
+	@NotNull
+	private Integer idColor;
+	
+	/**
+	 * Estas variables se utilizan para la carga de objetos al momento de listar las características
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_producto", insertable = false, updatable = false)
 	@MapsId("producto")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Producto producto;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_color")
-	@MapsId("color")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_color", insertable = false, updatable = false)
+	//@MapsId("color")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Color color;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_tipo_producto")
-	@MapsId("tipoProducto")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_tipo_producto", insertable = false, updatable = false)
+	//@MapsId("tipoProducto")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private TipoProducto tipoProducto;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_talla")
-	@MapsId("talla")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_talla", insertable = false, updatable = false)
+	//@MapsId("talla")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Talla talla;
 	
 	@OneToMany(mappedBy = "caracteristica")

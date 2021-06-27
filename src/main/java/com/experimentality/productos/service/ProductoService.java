@@ -7,7 +7,7 @@ import com.experimentality.productos.entity.Producto;
 public interface ProductoService {
 	
 	/**
-	 * Función para registrar la infomración del producto
+	 * Función para registrar la información del producto
 	 * @param producto
 	 * @return
 	 */
