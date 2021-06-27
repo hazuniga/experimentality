@@ -60,4 +60,9 @@ public class ImagenImpl implements ImagenService{
 		}
 	}
 
+	@Override
+	public Imagen getImagen(int idCategoria, String nombre, String tipo) {
+		return this.objDao.getImagen(idCategoria, nombre, tipo);
+	}
+
 }

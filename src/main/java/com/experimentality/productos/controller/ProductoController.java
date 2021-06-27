@@ -62,7 +62,7 @@ public class ProductoController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> actualizar(@RequestBody Producto producto) {
+	public ResponseEntity<?> actualizar(@RequestBody ProductoDto producto) {
 		boolean option = this.productoService.actualizar(producto);
 		
 		return new ResponseEntity<Boolean>(option,HttpStatus.OK);

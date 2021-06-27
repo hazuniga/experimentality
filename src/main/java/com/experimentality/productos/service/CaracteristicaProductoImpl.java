@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.experimentality.productos.dao.CaracteristicaProductoDao;
+import com.experimentality.productos.dto.CaracteristicaDto;
 import com.experimentality.productos.dto.ProductoDto;
 import com.experimentality.productos.entity.CaracteristicaProducto;
 
@@ -57,6 +58,21 @@ public class CaracteristicaProductoImpl implements CaracteristicaProductoService
 		caracteristica = this.guardar(caracteristica);
 		
 		return caracteristica.getId();
+	}
+
+	@Override
+	public CaracteristicaProducto getCaracteristicaPorProducto(int idProducto, CaracteristicaDto caracteristica) {
+		return this.objDao.findByCaracteristicas(idProducto, caracteristica.getIdTalla(), caracteristica.getIdColor(), caracteristica.getIdTipoProducto());
+	}
+
+	@Override
+	public boolean validarCaracteristicas(int idProducto, CaracteristicaDto caracteristica) {
+		CaracteristicaProducto obj = new CaracteristicaProducto();
+		obj = this.objDao.findByCaracteristicas(idProducto, caracteristica.getIdTalla(), caracteristica.getIdColor(), caracteristica.getIdTipoProducto());
+		if(obj.getIdColor() == null) {
+			return false;
+		}
+		return true;
 	}
 
 }

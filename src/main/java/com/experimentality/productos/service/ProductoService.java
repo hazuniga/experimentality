@@ -35,7 +35,7 @@ public interface ProductoService {
 	 * @param producto
 	 * @return
 	 */
-	public boolean actualizar(Producto producto);
+	public boolean actualizar(ProductoDto producto);
 	
 	/**
 	 * Función que retorna un producto de acuerdo al id ingresado

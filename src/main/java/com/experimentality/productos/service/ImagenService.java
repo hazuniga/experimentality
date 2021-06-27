@@ -28,6 +28,16 @@ public interface ImagenService {
 	public List<Imagen> listarImagenes(int idProducto);
 	
 	/**
+	 * Se obtiene una imagen con las caracteristicas diferenciales y el tipo 
+	 * es decir, frontal o tracera
+	 * @param idCategoria
+	 * @param nombre
+	 * @param tipo
+	 * @return
+	 */
+	public Imagen getImagen(int idCategoria, String nombre, String tipo);
+	
+	/**
 	 * Función que actualiza la información de una imagen registrada en el 
 	 * sistema
 	 * @param imagen

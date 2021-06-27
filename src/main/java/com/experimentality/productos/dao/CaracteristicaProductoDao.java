@@ -46,4 +46,10 @@ public interface CaracteristicaProductoDao extends CrudRepository<Caracteristica
 			"			t.id_talla,\r\n" + 
 			"			i.id_imagen", nativeQuery = true)
 	public List<CaracteristicaProducto> productosMasBuscados();
+	
+	@Query(value = "select	*\r\n" + 
+			"from	caracteristicas_productos\r\n" + 
+			"where	id_producto = ?1 and id_talla = ?2 and id_color = ?3 and id_tipo_producto = ?4\r\n" + 
+			"limit 1", nativeQuery = true)
+	public CaracteristicaProducto findByCaracteristicas(int idProduct, int idTalla, int idColor, int idTipo);
 }

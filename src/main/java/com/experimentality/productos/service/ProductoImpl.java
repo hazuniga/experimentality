@@ -10,10 +10,12 @@ import com.experimentality.catalogo.service.ColorService;
 import com.experimentality.catalogo.service.TallaService;
 import com.experimentality.catalogo.service.TipoProductoService;
 import com.experimentality.productos.dao.ProductoDao;
+import com.experimentality.productos.dto.CaracteristicaDto;
 import com.experimentality.productos.dto.ImagenDto;
 import com.experimentality.productos.dto.ProductoDto;
 import com.experimentality.productos.dto.ProductosMasBuscadosDto;
 import com.experimentality.productos.entity.CaracteristicaProducto;
+import com.experimentality.productos.entity.Imagen;
 import com.experimentality.productos.entity.Producto;
 import com.experimentality.ventas.service.PaisVentaService;
 
@@ -58,6 +60,9 @@ public class ProductoImpl implements ProductoService{
 				objProducto = this.guardar(this.prepararProducto(producto));
 			}else {
 				objProducto.setId(id);
+				if(this.caracteristicaService.validarCaracteristicas(id, producto.getCaracteristica())) {
+					return new ProductoDto();
+				}
 			}
 			
 			producto.setId(id);
@@ -77,9 +82,23 @@ public class ProductoImpl implements ProductoService{
 	}
 
 	@Override
-	public boolean actualizar(Producto producto) {
+	public boolean actualizar(ProductoDto producto) {
 		try {
-			this.objDao.save(producto);
+			Producto objProducto = new Producto();
+			CaracteristicaProducto objCaracteristica = new CaracteristicaProducto();
+			Imagen imagen = new Imagen();
+			
+			int id = this.buscarProducto(producto);
+			objCaracteristica = this.caracteristicaService.getCaracteristicaPorProducto(id, producto.getCaracteristica());
+			imagen = this.imagenService.getImagen(objCaracteristica.getId(), producto.getImagenes().get(0).getImagen(), producto.getImagenes().get(0).getTipo());
+			producto.setId(id);
+			objProducto.setId(id);
+			
+			objProducto = this.guardar(this.prepararProducto(producto));
+			this.caracteristicaService.actualizar(objCaracteristica);
+			this.imagenService.actualizar(imagen);
+			this.ventaService.guardarPaisVenta(producto.getPaisVenta(), objCaracteristica.getId());
+			
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -168,6 +187,7 @@ public class ProductoImpl implements ProductoService{
 		
 		return !response;
 	}
+	
 	
 	/**
 	 * Función que setea los valores de tipo ProductoDto a Producto

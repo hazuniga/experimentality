@@ -2,6 +2,7 @@ package com.experimentality.productos.service;
 
 import java.util.List;
 
+import com.experimentality.productos.dto.CaracteristicaDto;
 import com.experimentality.productos.dto.ProductoDto;
 import com.experimentality.productos.entity.CaracteristicaProducto;
 
@@ -51,4 +52,22 @@ public interface CaracteristicaProductoService {
 	 * @return
 	 */
 	public int guardarCaracteristica(ProductoDto producto, int idProducto);
+	
+	/**
+	 * Recupera un objeto de tipo CaracteristicaProducto con el identificador del producto
+	 * @param idProducto
+	 * @param caracteristica
+	 * @return
+	 */
+	public CaracteristicaProducto getCaracteristicaPorProducto(int idProducto, CaracteristicaDto caracteristica);
+	
+	/**
+	 * Función que valida que no existan datos similares en las caracteristicas.
+	 * Si no existen datos similares retorna false, si existen datos similares retorna true.
+	 * @param idProducto
+	 * @param caracteristica
+	 * @return
+	 */
+	public boolean validarCaracteristicas(int idProducto, CaracteristicaDto caracteristica);
+	
 }
